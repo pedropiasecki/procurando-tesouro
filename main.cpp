@@ -168,7 +168,6 @@ int main() {
                     cout<<layout[i][j]<<" ";
                 }
                 else cout<<" ["<<layout[i][j]<<"] ";
-                // cout<<"["<<layout[i][j]<<"] ";
                 if (j==6) cout<<endl;
             }
         }
@@ -181,7 +180,7 @@ int main() {
             cout<<"Coluna: "; cin>>y;
         }
         if (layout[x][y] == 'a' || layout[x][y] == 'b' || layout[x][y] == 'c' || layout[x][y] == 'd') {
-            while (layout[x][y] == 'x') {
+            while (layout[x][y] == 'a' || layout[x][y] == 'b' || layout[x][y] == 'c' || layout[x][y] == 'd') {
                 cout<<"Escolha um lugar livre!"<<endl;
                 cout<<"Linha: "; cin>>x;
                 while (x < 1 || x > 6) {
@@ -194,11 +193,18 @@ int main() {
             }
         }
         cout<<endl;
-
-        if (k==1) layout[x][y] = 'a';
-        else if (k==2) layout[x][y] = 'b';
-        else if (k==3) layout[x][y] = 'c';
-        else if (k==4) layout[x][y] = 'd';
+        if (matriz[x-1][y-1] == '-' || matriz[x-1][y-1] == '+' || matriz[x-1][y-1] == ',' || matriz[x-1][y-1] == 'O' ) {
+            if (matriz[x-1][y-1] == '-') layout[x][y] = '-';
+            else if (matriz[x-1][y-1] == '+') layout[x][y] = '+';
+            else if (matriz[x-1][y-1] == ',') layout[x][y] = ',';
+            else if (matriz[x-1][y-1] == 'O') layout[x][y] = 'O';
+        }
+        else {
+            if (k==1) layout[x][y] = 'a';
+            else if (k==2) layout[x][y] = 'b';
+            else if (k==3) layout[x][y] = 'c';
+            else if (k==4) layout[x][y] = 'd';
+        }
         
 
         valor_bloco = valor_achado(x-1, y-1);
@@ -340,7 +346,21 @@ int main() {
         }
         cont++;
     }
-
+    linhas();
+    cout<<"Layout FINAL"<<endl;
+    linhas();
+    for (int i=0;i<7;i++) {
+        for (int j=0;j<7;j++) {
+            if (i==0) {
+                cout<<layout[i][j]<<"    ";
+            }
+            else if (j==0) {
+                cout<<layout[i][j]<<" ";
+            }
+            else cout<<" ["<<layout[i][j]<<"] ";
+            if (j==6) cout<<endl;
+        }
+    }
     linhas();
     cout<<"Pontuacao FINAL"<<endl;
     linhas();
